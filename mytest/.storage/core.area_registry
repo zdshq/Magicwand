@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "minor_version": 6,
+  "key": "core.area_registry",
+  "data": {
+    "areas": [
+      {
+        "aliases": [],
+        "floor_id": null,
+        "icon": null,
+        "id": "ke_ting",
+        "labels": [],
+        "name": "客厅",
+        "picture": null
+      },
+      {
+        "aliases": [],
+        "floor_id": null,
+        "icon": null,
+        "id": "chu_fang",
+        "labels": [],
+        "name": "厨房",
+        "picture": null
+      },
+      {
+        "aliases": [],
+        "floor_id": null,
+        "icon": null,
+        "id": "wo_shi",
+        "labels": [],
+        "name": "卧室",
+        "picture": null
+      }
+    ]
+  }
+}

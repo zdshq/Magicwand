@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "minor_version": 6,
+  "key": "core.device_registry",
+  "data": {
+    "devices": [
+      {"area_id":null,"config_entries":["01J3G9V3F3W3TMGG58M90B4AMC"],"configuration_url":null,"connections":[],"disabled_by":null,"entry_type":"service","hw_version":null,"id":"f833f73136f6b0fe059d1967b480d8d3","identifiers":[["sun","01J3G9V3F3W3TMGG58M90B4AMC"]],"labels":[],"manufacturer":null,"model":null,"name_by_user":null,"name":"Sun","primary_config_entry":"01J3G9V3F3W3TMGG58M90B4AMC","serial_number":null,"sw_version":null,"via_device_id":null},
+      {"area_id":null,"config_entries":["01J3G9YHE4S4AW261JTV5WE21A"],"configuration_url":"https://www.met.no/en","connections":[],"disabled_by":null,"entry_type":"service","hw_version":null,"id":"4f28b5a1e8ca49db627361c797da481f","identifiers":[["met","01J3G9YHE4S4AW261JTV5WE21A"]],"labels":[],"manufacturer":"Met.no","model":"Forecast","name_by_user":null,"name":"Forecast","primary_config_entry":"01J3G9YHE4S4AW261JTV5WE21A","serial_number":null,"sw_version":null,"via_device_id":null},
+      {"area_id":null,"config_entries":["01J3QJMQA9RKJ9T2KV1JNER5KQ"],"configuration_url":null,"connections":[],"disabled_by":null,"entry_type":null,"hw_version":null,"id":"1ba1c19d0e2d1db32ab515a45aa0cc5b","identifiers":[["mqtt","ESP32-02"]],"labels":[],"manufacturer":"皓骅电子科技（青岛）有限公司","model":"HA","name_by_user":null,"name":"ESP32-02","primary_config_entry":"01J3QJMQA9RKJ9T2KV1JNER5KQ","serial_number":null,"sw_version":"1.0","via_device_id":null},
+      {"area_id":null,"config_entries":["01J3QJMQA9RKJ9T2KV1JNER5KQ"],"configuration_url":null,"connections":[],"disabled_by":null,"entry_type":null,"hw_version":null,"id":"19301268786b9f52e0a1aac251d58231","identifiers":[["mqtt","hp_1231232"]],"labels":[],"manufacturer":null,"model":null,"name_by_user":null,"name":"Heat pump","primary_config_entry":"01J3QJMQA9RKJ9T2KV1JNER5KQ","serial_number":null,"sw_version":null,"via_device_id":null}
+    ],
+    "deleted_devices": []
+  }
+}
