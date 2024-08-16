@@ -2,13 +2,14 @@ import numpy
 import numpy as np
 import torch
 import torch.nn as nn
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset, DataLoader,random_split
 
 import re
 import os
 import sklearn
 DataPath = "../../Dataset"
 TestPath = "../../Dataset/TestData"
+ModelWight = "model_weights.pth"
 echos = 400
 
 def load_data(folder_path):
@@ -64,6 +65,7 @@ class RNN(nn.Module):
         self.linear = nn.Linear(hidden_units, class_num)
 
     def forward(self, data:torch.Tensor):
+
         batch,Tx,dim = data.shape[:]
 
         first_step = data.new_zeros(batch,1, dim)
@@ -71,7 +73,6 @@ class RNN(nn.Module):
         x = x.float()
         hidden = torch.zeros(1 , batch, self.hidden_units, device=data.device)
         hidden = hidden.float()
-        print(hidden.shape)
         x = self.drop(x)
         output, hidden = self.rnn(x, hidden)
         y = self.linear(output)
@@ -90,26 +91,25 @@ def standardize(samples):
 device = 'cuda:0'
 
 samples, labels = load_data(DataPath)
-samples_, labels_ = load_data(TestPath)
-
 features = standardize(samples)
-features_ = standardize(samples_)
 dataset = AttitudeData(features,labels)
-dataloader = DataLoader(dataset, batch_size=3, shuffle=True)
+train_size = int(len(dataset) * 0.9)
+test_size = int(len(dataset) - train_size)
+train_dataset, test_dataset = random_split(dataset, [train_size, test_size])
+train_dataset = DataLoader(train_dataset, batch_size=2, shuffle=True)
+test_dataset = DataLoader(test_dataset, batch_size=2, shuffle=True)
 model = RNN().to(device='cuda:0')
 optimizer = torch.optim.Adam(model.parameters(), lr=0.003)
 criterion = torch.nn.CrossEntropyLoss()
 
 for echo in range(echos):
     loss_sum = 0
-
-    for x, y in dataloader:
+    for x, y in train_dataset:
         x = x.to(device)
         y = y.to(device)
         y = y.to(torch.int64)
         hat_y = model(x)
         hat_y = hat_y.mean(axis=1)
-        loss = criterion(hat_y, y)
         # 计算损失
         loss = criterion(hat_y, y)
 
@@ -124,11 +124,19 @@ for echo in range(echos):
 
         # 记录损失
         loss_sum += loss.item()
-    print(f'Epoch {echo + 1}/{echos}, Loss: {loss_sum / len(dataloader)}')
-
-
-
+    print(f'Epoch {echo + 1}/{echos}, Loss: {loss_sum / len(train_dataset)}')
+accuracy = 0
 with torch.no_grad():
-    y = model(torch.tensor(features_).to(device))
-    print(torch.argmax(y.mean(axis=1), dim=1))
-    print(labels_)
+    for (x, y) in test_dataset:
+        x = x.to(device)
+        y = y.to(device)
+        y = y.to(torch.int64)
+        y_hat = model(x)
+        y_hat = torch.argmax(y_hat.mean(axis=1),1)
+        accuracy += (y == y_hat).to(torch.float).sum()
+accuracy_rate = accuracy/len(test_dataset)
+print("accuracy_rate:" + str(torch.Tensor.cpu(accuracy_rate).numpy()))
+
+torch.save(model.state_dict(), "ModelWight.pth")
+
+
