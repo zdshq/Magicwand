@@ -1,7 +1,0 @@
-2024-08-17 20:21:33.340 WARNING (Recorder) [homeassistant.components.recorder.util] The system could not validate that the sqlite3 database at //config/home-assistant_v2.db was shutdown cleanly
-2024-08-17 20:21:33.366 WARNING (Recorder) [homeassistant.components.recorder.util] Ended unfinished session (id=15 from 2024-08-16 18:11:24.381327)
-2024-08-17 20:21:33.970 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorError'
-2024-08-17 20:21:36.405 ERROR (MainThread) [homeassistant.components.mqtt.client] Failed to connect to MQTT server due to exception: [Errno 111] Connection refused
-2024-08-17 20:21:43.158 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorError'
-2024-08-17 20:21:43.185 ERROR (MainThread) [homeassistant.components.homeassistant_alerts.coordinator] Error requesting homeassistant_alerts data: Cannot connect to host alerts.home-assistant.io:443 ssl:default [Network unreachable]
-2024-08-17 20:21:55.133 WARNING (MainThread) [aioesphomeapi.reconnect_logic] Can't connect to ESPHome API for my_first_esphome @ 192.168.1.11: Error connecting to [AddrInfo(family=<AddressFamily.AF_INET: 2>, type=<SocketKind.SOCK_STREAM: 1>, proto=6, sockaddr=IPv4Sockaddr(address='192.168.1.11', port=6053))]: [Errno 111] Connect call failed ('192.168.1.11', 6053) (SocketAPIError)
