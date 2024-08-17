@@ -99,6 +99,28 @@
         "title": "192.168.1.10",
         "unique_id": null,
         "version": 1
+      },
+      {
+        "data": {
+          "host": "192.168.1.11",
+          "port": 6053,
+          "password": "",
+          "noise_psk": "",
+          "device_name": "my_first_esphome"
+        },
+        "disabled_by": null,
+        "domain": "esphome",
+        "entry_id": "01J5EC458F76D0PA0G28CXS7G5",
+        "minor_version": 1,
+        "options": {
+          "allow_service_calls": true
+        },
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "user",
+        "title": "my_first_esphome",
+        "unique_id": "34:85:18:46:3d:40",
+        "version": 1
       }
     ]
   }

@@ -1,35 +1,7 @@
-2024-08-14 23:38:47.294 WARNING (Recorder) [homeassistant.components.recorder.util] The system could not validate that the sqlite3 database at //config/home-assistant_v2.db was shutdown cleanly
-2024-08-14 23:38:47.322 WARNING (Recorder) [homeassistant.components.recorder.util] Ended unfinished session (id=12 from 2024-08-03 01:10:09.681696)
-2024-08-14 23:38:50.147 ERROR (MainThread) [homeassistant.components.mqtt.client] Failed to connect to MQTT server due to exception: [Errno 111] Connection refused
-2024-08-14 23:44:27.573 WARNING (Thread-2 (_do_shutdown)) [homeassistant.util.executor] Thread[SyncWorker_6] is still running at shutdown: File "/usr/local/lib/python3.12/threading.py", line 1030, in _bootstrap
-    self._bootstrap_inner()
-  File "/usr/local/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
-    self.run()
-  File "/usr/local/lib/python3.12/threading.py", line 1010, in run
-    self._target(*self._args, **self._kwargs)
-  File "/usr/local/lib/python3.12/concurrent/futures/thread.py", line 92, in _worker
-    work_item.run()
-  File "/usr/local/lib/python3.12/concurrent/futures/thread.py", line 58, in run
-    result = self.fn(*self.args, **self.kwargs)
-  File "/usr/local/lib/python3.12/site-packages/paho/mqtt/client.py", line 1044, in reconnect
-    sock = self._create_socket_connection()
-  File "/usr/local/lib/python3.12/site-packages/paho/mqtt/client.py", line 3685, in _create_socket_connection
-    return socket.create_connection(addr, timeout=self._connect_timeout, source_address=source)
-  File "/usr/local/lib/python3.12/socket.py", line 838, in create_connection
-    sock.connect(sa)
-2024-08-14 23:44:28.561 WARNING (Thread-2 (_do_shutdown)) [homeassistant.util.executor] Thread[SyncWorker_6] is still running at shutdown: File "/usr/local/lib/python3.12/threading.py", line 1030, in _bootstrap
-    self._bootstrap_inner()
-  File "/usr/local/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
-    self.run()
-  File "/usr/local/lib/python3.12/threading.py", line 1010, in run
-    self._target(*self._args, **self._kwargs)
-  File "/usr/local/lib/python3.12/concurrent/futures/thread.py", line 92, in _worker
-    work_item.run()
-  File "/usr/local/lib/python3.12/concurrent/futures/thread.py", line 58, in run
-    result = self.fn(*self.args, **self.kwargs)
-  File "/usr/local/lib/python3.12/site-packages/paho/mqtt/client.py", line 1044, in reconnect
-    sock = self._create_socket_connection()
-  File "/usr/local/lib/python3.12/site-packages/paho/mqtt/client.py", line 3685, in _create_socket_connection
-    return socket.create_connection(addr, timeout=self._connect_timeout, source_address=source)
-  File "/usr/local/lib/python3.12/socket.py", line 838, in create_connection
-    sock.connect(sa)
+2024-08-17 20:21:33.340 WARNING (Recorder) [homeassistant.components.recorder.util] The system could not validate that the sqlite3 database at //config/home-assistant_v2.db was shutdown cleanly
+2024-08-17 20:21:33.366 WARNING (Recorder) [homeassistant.components.recorder.util] Ended unfinished session (id=15 from 2024-08-16 18:11:24.381327)
+2024-08-17 20:21:33.970 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorError'
+2024-08-17 20:21:36.405 ERROR (MainThread) [homeassistant.components.mqtt.client] Failed to connect to MQTT server due to exception: [Errno 111] Connection refused
+2024-08-17 20:21:43.158 ERROR (MainThread) [metno] Access to https://aa015h6buqvih86i1.api.met.no/weatherapi/locationforecast/2.0/complete returned error 'ClientConnectorError'
+2024-08-17 20:21:43.185 ERROR (MainThread) [homeassistant.components.homeassistant_alerts.coordinator] Error requesting homeassistant_alerts data: Cannot connect to host alerts.home-assistant.io:443 ssl:default [Network unreachable]
+2024-08-17 20:21:55.133 WARNING (MainThread) [aioesphomeapi.reconnect_logic] Can't connect to ESPHome API for my_first_esphome @ 192.168.1.11: Error connecting to [AddrInfo(family=<AddressFamily.AF_INET: 2>, type=<SocketKind.SOCK_STREAM: 1>, proto=6, sockaddr=IPv4Sockaddr(address='192.168.1.11', port=6053))]: [Errno 111] Connect call failed ('192.168.1.11', 6053) (SocketAPIError)

@@ -137,6 +137,6 @@ with torch.no_grad():
 accuracy_rate = accuracy/len(test_dataset)
 print("accuracy_rate:" + str(torch.Tensor.cpu(accuracy_rate).numpy()))
 
-torch.save(model.state_dict(), "ModelWight.pth")
+torch.save(model, "model.pth")
 
 
