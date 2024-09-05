@@ -14,8 +14,11 @@ const char* password = "88888888";
 char ftp_server[] = "192.168.1.10";
 char ftp_user[]   = "user";
 char ftp_pass[]   = "12345";
-
-
+enum{
+  Off = 0,
+  On  = 1
+};
+u8_t status_ = Off;
 #define KeyGpio  15
 #define LEDGpio  13
 #define MpuSCL    6
@@ -27,7 +30,6 @@ MPU6050 mpu(Wire);
 WiFiClient espClient;
 ESP32_FTPClient ftp (ftp_server,ftp_user,ftp_pass);
 
-unsigned long counter = 0;
 
 // 连接WiFi的函数
 void setup_wifi() {
@@ -91,54 +93,74 @@ void setup() {
   pinMode(KeyGpio, INPUT_PULLDOWN);
   pinMode(LEDGpio, OUTPUT);
   digitalWrite(LEDGpio, LOW);
-  setup_wifi();
+  // setup_wifi();
   setup_mpu6050();
 }
 
 void loop() {
-  // if (!client.connected()) {
-  //   reconnect();
-  // }
-  if(counter > 100000000)
-    counter = 0;
-  // if(!(counter % 100000))
-  // {
-  //   client.loop();
-  //   // 发布消息
-  //   Serial.println("publish");
-  //   client.publish("HA-ESP32-02/light/state", "on");
-  // }
+
 
   if(digitalRead(KeyGpio))
   {
-    ftp.OpenConnection();
-    //Change directory
-    ftp.ChangeWorkDir("/a");
     delay(10);
     if(digitalRead(KeyGpio))
     {
       digitalWrite(LEDGpio, HIGH);
-      while(digitalRead(KeyGpio))
-        delay(10);
-      ftp.InitFile("Type A");
-      ftp.NewFile("test.txt");
-      char buffer[512];
-      for(int i = 0; i < 200; i++)
-      {
-        mpu.update();
-        sprintf(buffer,"ACCELERO  X: %.2f\tY: %.2f\tZ: %.2f\n",  mpu.getAccX(), mpu.getAccY(), mpu.getAccZ());
-        ftp.Write(buffer);
-        sprintf(buffer,"GYRO  X: %.2f\tY: %.2f\tZ: %.2f\n",  mpu.getGyroX(), mpu.getGyroY(), mpu.getGyroZ());
-        ftp.Write(buffer);
-        sprintf(buffer,"ACC ANGLE X: %.2f\tY: %.2f\n",  mpu.getAccAngleX(), mpu.getAccAngleY());
-        ftp.Write(buffer);
-        delay(25);     
+      if(status_ == Off){
+        u64_t time = 0;
+        u8_t led_status = Off;
+        while(digitalRead(KeyGpio) && time++){
+          if(time > 100)
+            digitalWrite(LEDGpio, (~led_status) & (0x01));
+          Serial.println(time);
+          delay(10);
+        }
+        if(time > 100){
+          digitalWrite(LEDGpio, On);
+          status_ = On;
+        }
+        else{
+          digitalWrite(LEDGpio, Off);
+        } 
       }
-      ftp.CloseFile();
-      digitalWrite(LEDGpio, LOW);
+      else if(status_ == On)
+      {
+        u64_t time = 0;
+        u8_t led_status = Off;
+        while(digitalRead(KeyGpio) && time++){
+          if(time > 100)
+            digitalWrite(LEDGpio, Off);
+          delay(10);
+        }
+        if(time > 100){
+          digitalWrite(LEDGpio, Off);
+          status_ = Off;
+        }
+        else if(time > 10){
+          // ftp.OpenConnection();
+          //Change directory
+          // ftp.ChangeWorkDir("./a");
+          // ftp.InitFile("Type A");
+          // ftp.NewFile("test.txt");
+          char buffer[512];
+          for(int i = 0; i < 200; i++)
+          {
+            mpu.update();
+            sprintf(buffer,"ACCELERO  X: %.2f\tY: %.2f\tZ: %.2f\n",  mpu.getAccX(), mpu.getAccY(), mpu.getAccZ());
+            // ftp.Write(buffer);
+            sprintf(buffer,"GYRO  X: %.2f\tY: %.2f\tZ: %.2f\n",  mpu.getGyroX(), mpu.getGyroY(), mpu.getGyroZ());
+            // ftp.Write(buffer);
+            sprintf(buffer,"ACC ANGLE X: %.2f\tY: %.2f\n",  mpu.getAccAngleX(), mpu.getAccAngleY());
+            // ftp.Write(buffer);
+            digitalWrite(LEDGpio, (~led_status) & (0x01));
+            delay(25);     
+          }
+          digitalWrite(LEDGpio, On);
+          // ftp.CloseFile();
+          // ftp.CloseConnection();
+        } 
+      }
     }
-      ftp.CloseConnection();
   }
 
-  counter++;
 }
