@@ -106,16 +106,18 @@ void loop() {
     if(digitalRead(KeyGpio))
     {
       digitalWrite(LEDGpio, HIGH);
+      Serial.println("AA");
       if(status_ == Off){
         u64_t time = 0;
         u8_t led_status = Off;
-        while(digitalRead(KeyGpio) && time++){
-          if(time > 100)
+        while(digitalRead(KeyGpio) && ++time){
+          if(time > 40){
+            led_status = (~led_status) & (0x01);
             digitalWrite(LEDGpio, (~led_status) & (0x01));
-          Serial.println(time);
-          delay(10);
+          }
+          delay(25);
         }
-        if(time > 100){
+        if(time > 40){
           digitalWrite(LEDGpio, On);
           status_ = On;
         }
@@ -127,7 +129,7 @@ void loop() {
       {
         u64_t time = 0;
         u8_t led_status = Off;
-        while(digitalRead(KeyGpio) && time++){
+        while(digitalRead(KeyGpio) && ++time){
           if(time > 100)
             digitalWrite(LEDGpio, Off);
           delay(10);
@@ -152,6 +154,7 @@ void loop() {
             // ftp.Write(buffer);
             sprintf(buffer,"ACC ANGLE X: %.2f\tY: %.2f\n",  mpu.getAccAngleX(), mpu.getAccAngleY());
             // ftp.Write(buffer);
+            led_status = (~led_status) & (0x01);
             digitalWrite(LEDGpio, (~led_status) & (0x01));
             delay(25);     
           }
